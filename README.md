@@ -182,8 +182,8 @@ chatgpt-organizer/
 
 ## API Endpoints
 
-### POST `/api/register-key`
-Register an OpenAI API key for temporary use.
+#### POST `/api/register-key`
+- Register an OpenAI API key for temporary use.
 
 **Request:**
 ```json
@@ -200,8 +200,8 @@ Register an OpenAI API key for temporary use.
 }
 ```
 
-### POST `/api/categorize`
-Start a categorization job.
+#### POST `/api/categorize`
+- Start a categorization job.
 
 **Headers:**
 - `X-Key-Token`: Required for category mode
@@ -212,11 +212,11 @@ Start a categorization job.
 - `batch_size`: 5-100 (optional)
 - `max_concurrency`: 1-8 (optional)
 
-### GET `/api/progress/<job_id>`
-Check job progress.
+#### GET `/api/progress/<job_id>`
+- Check job progress.
 
-### GET `/api/result/<job_id>`
-Retrieve completed job results.
+#### GET `/api/result/<job_id>`
+- Retrieve completed job results.
 
 ## Development
 
