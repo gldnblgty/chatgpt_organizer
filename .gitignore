@@ -1,0 +1,4 @@
+server_secret.key
+__pycache__
+.venv
+.pytest_cache
