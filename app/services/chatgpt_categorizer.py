@@ -1,5 +1,6 @@
 import json
 import time
+import re
 from collections import defaultdict
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Tuple, Optional
@@ -80,6 +81,19 @@ class ChatGPTCategorizer:
                 continue
         return '\n'.join(parts)[:max_chars]
 
+    @staticmethod
+    def _sanitize_error(message: str) -> str:
+        try:
+            s = str(message)
+        except Exception:
+            return "Unknown error"
+        # redact possible OpenAI key patterns like sk-...
+        s = re.sub(r"sk-[A-Za-z0-9_\-]{8,}", "sk-REDACTED", s)
+        # limit length to avoid leaking large payloads
+        if len(s) > 300:
+            return s[:300] + "..."
+        return s
+
     # ---------- OpenAI call ----------
     def batch_categorize_with_gpt(
         self,
@@ -120,13 +134,16 @@ Respond ONLY as JSON with this exact shape and never use "Uncategorized" categor
                 response_format={"type": "json_object"}
             )
             content = resp.choices[0].message.content
+            #print(content)
             data = json.loads(content)
             arr = data.get("categories", [])
             if not isinstance(arr, list) or len(arr) != len(conversations_batch):
                 raise ValueError("Model did not return a categories array with correct length.")
             return [str(x) for x in arr]
-        except Exception:
-            # Do not leak prompts or payload details in logs.
+        except Exception as e:
+            # Do not leak prompts, payloads or API keys — print a sanitized error.
+            sanitized = self._sanitize_error(e)
+            print(f"Categorization error: {sanitized}")
             return ["Uncategorized"] * len(conversations_batch)
 
     # ---------- Main ----------
