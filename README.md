@@ -19,6 +19,23 @@ Upload your conversations.json file (exported from ChatGPT), and the app will:
 The app is designed as a reporting tool for anyone who wants to make sense of their growing ChatGPT history.
 It uses a background job system for scalable processing and gracefully handles large exports with retry logic and clear feedback.
 
+## Screenshots
+
+Happy Path
+
+<img src="images/image.png" width="300" height="200">
+
+<img src="images/image2.png" width="300" height="200">
+
+<img src="images/image3.png" width="300" height="200">
+
+Result - AI Based Categorization
+
+<img src="images/image4.png" width="800" height="100">
+
+Result - Month based Categorization
+
+<img src="image.png" width="800" height="100">
 
 ## Prerequisites
 
