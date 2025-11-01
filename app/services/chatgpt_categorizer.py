@@ -18,7 +18,7 @@ class ChatGPTCategorizer:
       - Sets client timeouts.
       - Avoids logging/printing sensitive content.
     """
-    def __init__(self, api_key: str, timeout_seconds: float = 45.0):
+    def __init__(self, api_key: str, timeout_seconds: float = 90.0):
         if not (isinstance(api_key, str) and api_key.startswith("sk-")):
             raise ValueError("Valid OpenAI API key is required.")
         # Do NOT keep api_key on the instance; hand it straight to the client.
