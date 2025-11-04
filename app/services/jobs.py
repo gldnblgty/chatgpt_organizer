@@ -1,8 +1,5 @@
 import json
 import os
-import tempfile
-import threading
-import uuid
 import traceback
 from datetime import datetime
 

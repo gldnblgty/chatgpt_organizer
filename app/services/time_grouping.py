@@ -47,7 +47,7 @@ def group_conversations_by_date(conversations, mode="month"):
         period = year_only(date_str) if mode == "year" else pretty_month(date_str)
         result.setdefault(period, {}).setdefault("All", []).append(info)
 
-    # 🧩 Sort the outer keys (month/year buckets)
+    # Sort the outer keys (month/year buckets)
     from datetime import datetime
 
     def _period_sort_key(p: str, mode: str):
@@ -66,7 +66,7 @@ def group_conversations_by_date(conversations, mode="month"):
         ordered[period] = result[period]
     result = ordered
 
-    # 📅 Sort conversations within each bucket
+    # Sort conversations within each bucket
     for period in result:
         for category in result[period]:
             result[period][category] = sorted(
